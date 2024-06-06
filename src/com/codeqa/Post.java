@@ -102,13 +102,13 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" +
-                "title='" + title + '\'' +
-                ", body='" + body + '\'' +
-                ", tags=" + tags +
-                ", difficulty='" + difficulty + '\'' +
-                ", urgency='" + urgency + '\'' +
-                ", comments=" + comments +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Title: ").append(title).append("\n")
+                .append("Body: ").append(body).append("\n")
+                .append("Tags: ").append(tags).append("\n")
+                .append("Difficulty: ").append(difficulty).append("\n")
+                .append("Urgency: ").append(urgency).append("\n");
+        return sb.toString();
     }
 }
+

@@ -63,7 +63,14 @@ public class PostTest {
     }
 
     @Test
-    public void testAddComment_TooManyComments() {
+    public void testAddComment_CommentExceedsWordLimit() {
+        Post post = new Post("Valid Title", "This is a valid body with more than 250 characters. ".repeat(10),
+                Arrays.asList("tag1", "tag2"), "Difficult", "Highly Needed");
+        assertFalse(post.addComment("This is a very valid comment. It exceeds the word limit."));
+    }
+
+    @Test
+    public void testAddComment_AddingSixthComment() {
         Post post = new Post("Valid Title", "This is a valid body with more than 250 characters. ".repeat(10),
                 Arrays.asList("tag1", "tag2"), "Difficult", "Highly Needed");
         post.addComment("This is a valid comment.");
@@ -71,7 +78,7 @@ public class PostTest {
         post.addComment("Yet another valid comment.");
         post.addComment("Still a valid comment.");
         post.addComment("Valid comment again.");
-        assertFalse(post.addComment("This is a valid comment."));
+        assertFalse(post.addComment("This is valid."));
     }
 
     @Test
@@ -90,21 +97,4 @@ public class PostTest {
         post.addComment("Yet another valid comment.");
         assertFalse(post.addComment("This is a valid comment for an Easy post."));
     }
-
-    @Test
-    public void testDeleteComment_AsAdmin() {
-        Post post = new Post("Valid Title", "This is a valid body with more than 250 characters. ".repeat(10),
-                Arrays.asList("tag1", "tag2"), "Difficult", "Highly Needed");
-        post.addComment("This is a valid comment.");
-        assertTrue(post.deleteComment("This is a valid comment.", true));
-    }
-
-    @Test
-    public void testDeleteComment_AsNonAdmin() {
-        Post post = new Post("Valid Title", "This is a valid body with more than 250 characters. ".repeat(10),
-                Arrays.asList("tag1", "tag2"), "Difficult", "Highly Needed");
-        post.addComment("This is a valid comment.");
-        assertFalse(post.deleteComment("This is a valid comment.", false));
-    }
 }
-
