@@ -50,6 +50,13 @@ public class Post {
         return false;
     }
 
+    public boolean deleteComment(String comment, boolean isAdmin) {
+        if (isAdmin) {
+            return comments.remove(comment);
+        }
+        return false;
+    }
+
     private boolean validateTitle(String title) {
         return title.length() >= 10 && title.length() <= 250 && !title.matches("^[0-9!@#\\$%\\^&\\*].*");
     }
@@ -101,6 +108,7 @@ public class Post {
                 ", tags=" + tags +
                 ", difficulty='" + difficulty + '\'' +
                 ", urgency='" + urgency + '\'' +
+                ", comments=" + comments +
                 '}';
     }
 }
