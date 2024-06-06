@@ -73,12 +73,12 @@ public class PostTest {
     public void testAddComment_AddingSixthComment() {
         Post post = new Post("Valid Title", "This is a valid body with more than 250 characters. ".repeat(10),
                 Arrays.asList("tag1", "tag2"), "Difficult", "Highly Needed");
-        post.addComment("This is a valid comment.");
-        post.addComment("This is another valid comment.");
-        post.addComment("Yet another valid comment.");
-        post.addComment("Still a valid comment.");
-        post.addComment("Valid comment again.");
-        assertFalse(post.addComment("This is valid."));
+        post.addComment("This is valid content 1.");
+        post.addComment("This is valid content 2.");
+        post.addComment("This is valid content 3.");
+        post.addComment("This is valid content 4.");
+        post.addComment("This is valid content 5.");
+        assertFalse(post.addComment("This is valid content 6."));
     }
 
     @Test
@@ -92,9 +92,9 @@ public class PostTest {
     public void testAddComment_TooManyCommentsForEasyPost() {
         Post post = new Post("Valid Title", "This is a valid body with more than 250 characters. ".repeat(10),
                 Arrays.asList("tag1", "tag2"), "Easy", "Ordinary");
-        post.addComment("This is a valid comment.");
-        post.addComment("This is another valid comment.");
-        post.addComment("Yet another valid comment.");
+        post.addComment("This is valid comment 1.");
+        post.addComment("This is valid comment 2.");
+        post.addComment("This is valid comment 3.");
         assertFalse(post.addComment("This is a valid comment for an Easy post."));
     }
 }

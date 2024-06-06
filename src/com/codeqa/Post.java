@@ -37,7 +37,7 @@ public class Post {
 
     public boolean addComment(String comment) {
         if (validateComment(comment)) {
-            if (comments.size() < MAX_COMMENTS) {
+            if ((difficulty.equals("Easy") && comments.size() < 3) || (difficulty.equals("Difficult") && comments.size() < MAX_COMMENTS)) {
                 comments.add(comment);
                 try (FileWriter writer = new FileWriter("comments.txt", true)) {
                     writer.write(comment + "\n");
@@ -45,10 +45,13 @@ public class Post {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            } else {
+                System.out.println("Maximum comment limit reached for this post difficulty. Cannot add more comments.");
             }
         }
         return false;
     }
+
 
     public boolean deleteComment(String comment, boolean isAdmin) {
         if (isAdmin) {
